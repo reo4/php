@@ -10,7 +10,7 @@
 <body>
     Home
     <img src="/avatar.webp" alt="">
-    <?= $user['email'] ?>
+    <?= $hello ?>
 </body>
 
 </html>

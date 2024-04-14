@@ -1,5 +1,7 @@
 <?php
 
+use App\Session;
+
 function dd($var)
 {
     echo '<pre style="font-size:20px;">';
@@ -8,7 +10,7 @@ function dd($var)
 
     echo '</pre>';
 
-    die();
+    exit();
 }
 
 function abort($statusCode = 404)
@@ -17,7 +19,7 @@ function abort($statusCode = 404)
 
     require "views/$statusCode.php";
 
-    die();
+    exit();
 }
 
 function authorize($condition)
@@ -30,4 +32,27 @@ function authorize($condition)
 function base_path($path)
 {
     return BASE_PATH . $path;
+}
+
+function redirect($path)
+{
+    header("location: {$path}");
+    exit();
+}
+
+function view($path, $attributes = [])
+{
+    extract($attributes);
+
+    require base_path('views/' . $path);
+}
+
+function session($key)
+{
+    return Session::get($key);
+}
+
+function old($key, $default = '')
+{
+    return Session::get('old')[$key] ?? $default;
 }

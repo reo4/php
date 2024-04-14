@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    Login
+    Login , <?= $_SESSION['name'] ?? 'Geuest' ?>
+
+    <?= session('hello') ?>
 </body>
 
 </html>

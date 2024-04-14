@@ -1,5 +1,7 @@
 <?php
 
-use app\Database;
+use App\Database;
 
 $db = new Database();
+
+session_start();
