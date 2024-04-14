@@ -19,6 +19,11 @@ class Session
         return $_SESSION['_flash'][$key] ?? $_SESSION[$key] ?? $default;
     }
 
+    public static function remove($key)
+    {
+        unset($_SESSION[$key]);
+    }
+
     public static function flash($key, $value)
     {
         $_SESSION['_flash'][$key] = $value;
@@ -29,19 +34,15 @@ class Session
         unset($_SESSION['_flash']);
     }
 
-    public static function forget($key)
-    {
-        unset($_SESSION[$key]);
-    }
 
-    public static function flush()
+    public static function clear()
     {
         $_SESSION = [];
     }
 
     public static function destroy()
     {
-        static::flush();
+        static::clear();
 
         session_destroy();
 
@@ -52,5 +53,10 @@ class Session
     public static function regenerate()
     {
         session_regenerate_id(true);
+    }
+
+    public static function start()
+    {
+        session_start();
     }
 }

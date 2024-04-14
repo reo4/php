@@ -37,6 +37,7 @@ function base_path($path)
 function redirect($path)
 {
     header("location: {$path}");
+
     exit();
 }
 
@@ -44,7 +45,9 @@ function view($path, $attributes = [])
 {
     extract($attributes);
 
-    require base_path('views/' . $path);
+    require base_path('views/' . str_replace('.', '/', $path) . '.view.php');
+
+    exit();
 }
 
 function session($key)
@@ -52,7 +55,12 @@ function session($key)
     return Session::get($key);
 }
 
-function old($key, $default = '')
+function old($key)
 {
-    return Session::get('old')[$key] ?? $default;
+    return Session::get('old')[$key];
+}
+
+function errors($key)
+{
+    return Session::get('errors')[$key];
 }
