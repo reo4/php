@@ -17,7 +17,7 @@ function abort($statusCode = 404)
 {
     http_response_code($statusCode);
 
-    require "views/$statusCode.php";
+    require "views/errors/$statusCode.php";
 
     exit();
 }
